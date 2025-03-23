@@ -264,10 +264,6 @@ Contributions are welcome! Some areas for improvement:
 - Further performance optimization
 - Adding a proper test suite
 
-## License
-
-This project is available under the MIT License.
-
 ## References
 
 - Lafont, Y. (1990). "Interaction Nets"
