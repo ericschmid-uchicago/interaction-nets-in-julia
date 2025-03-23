@@ -4,6 +4,14 @@
 
 This project implements Interaction Nets, a graphical rewriting system based on linear logic, in the Julia programming language. Interaction Nets provide a powerful model for concurrent computation with strong theoretical foundations in linear logic.
 
+## Interaction Net Diagram
+
+The key operation in interaction nets is cut elimination, as shown in this diagram. "With nets, the cut-elimination becomes surprisingly simple. There is only one reduction rule:" (Lafont)
+
+![Interaction Net Cut Elimination](interaction-net-diagram.png) (Lafont)
+
+When two agents (tensor ⊗ and par ⅋) connect through their principal ports, they interact by creating direct connections between their auxiliary ports.
+
 ## Features
 
 - **Pure Interaction Net Model**: Implementation closely following Lafont's original formulation
@@ -59,20 +67,7 @@ connect(a.ports[1], b.ports[1])
 run_net(net)
 ```
 
-## Key Concepts
-
-### Agents and Ports
-
-Agents are the basic computational units in interaction nets. Each agent has:
-- A principal port
-- Zero or more auxiliary ports
-- A type that determines its behavior
-
-### Interaction Rules
-
-When two agents are connected via their principal ports, they can interact according to defined rules. The interaction creates new connections between their auxiliary ports.
-
-### Linear Logic Semantics
+## Linear Logic Semantics
 
 Linear logic, introduced by Jean-Yves Girard in 1987, is a resource-conscious logic system that treats formulas as resources that must be consumed exactly once. This project implements a fragment of multiplicative linear logic (MLL), which includes these key operators:
 
@@ -91,8 +86,6 @@ In this implementation, the tensor and par operators are directly represented as
 ```
 (A ⊗ B) cut (A^⊥ ⅋ B^⊥) → (A cut A^⊥) ⊗ (B cut B^⊥) → 1
 ```
-
-This follows the resource interpretation where connecting a formula with its dual consumes both resources, resulting in no remaining resources (represented by the unit 1).
 
 The complete reduction to the unit 1 happens in these steps:
 
@@ -150,7 +143,7 @@ The identity (axiom) rule in linear logic is:
 ⊢ A, A^⊥
 ```
 
-Which states that for any formula A, we can prove A or its dual A^⊥. In interaction net terms, this represents the potential connection between dual ports. 
+Which states that for any formula A, we can prove A or its dual A^⊥. In interaction net terms, this represents the potential connection between dual ports.
 
 #### Reduction to Multiplicative Unit
 
@@ -182,8 +175,6 @@ The complete cut elimination process ultimately reduces to the multiplicative un
 ```
 
 The reduction of complex formulas to the unit 1 through cut elimination represents the successful completion of computation in the interaction net model, where all active pairs have been processed and all resources have been properly consumed.
-
-This transformation in sequent calculus directly corresponds to the interaction between tensor and par agents in our implementation.
 
 ### Tensor and Par Implementation
 
