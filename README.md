@@ -258,5 +258,6 @@ Contributions are welcome! Some areas for improvement:
 ## References
 
 - Lafont, Y. (1990). "Interaction Nets"
+- Lafont, Y. (1994). "From Proof-Nets to Interaction Nets"
 - Girard, J.-Y. (1987). "Linear Logic"
 - Mackie, I. (1998). "The Geometry of Implementation"
