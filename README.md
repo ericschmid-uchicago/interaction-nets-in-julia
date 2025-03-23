@@ -8,7 +8,7 @@ This project implements Interaction Nets, a graphical rewriting system based on 
 
 The key operation in interaction nets is cut elimination, as shown in this diagram. "With nets, the cut-elimination becomes surprisingly simple. There is only one reduction rule:" (Lafont)
 
-![Interaction Net Cut Elimination](interaction-net-diagram.png) (Lafont)
+![Interaction Net Cut Elimination](lafont-interaction-net-diagram.png) (Lafont)
 
 When two agents (tensor ⊗ and par ⅋) connect through their principal ports, they interact by creating direct connections between their auxiliary ports.
 
