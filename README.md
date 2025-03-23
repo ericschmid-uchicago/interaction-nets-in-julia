@@ -94,6 +94,97 @@ In this implementation, the tensor and par operators are directly represented as
 
 This follows the resource interpretation where connecting a formula with its dual consumes both resources, resulting in no remaining resources (represented by the unit 1).
 
+The complete reduction to the unit 1 happens in these steps:
+
+1. First, the interaction between tensor and par formulas breaks down into two parallel cuts:
+   (A ⊗ B) cut (A^⊥ ⅋ B^⊥) → (A cut A^⊥) ⊗ (B cut B^⊥)
+
+2. Each cut between a formula and its dual reduces to the unit:
+   - (A cut A^⊥) → 1
+   - (B cut B^⊥) → 1
+
+3. This gives us:
+   1 ⊗ 1
+
+4. The tensor of units further simplifies:
+   1 ⊗ 1 → 1
+
+This final reduction to 1 represents the complete consumption of all resources and successful termination of the computation.
+
+#### Sequent Calculus Presentation
+
+The cut elimination rule can also be expressed in sequent calculus notation. In the multiplicative linear logic sequent calculus:
+
+```
+Γ ⊢ A, Δ    Γ' ⊢ B, Δ'
+------------------------ (⊗-right)
+Γ, Γ' ⊢ A ⊗ B, Δ, Δ'
+
+Θ, A, B ⊢ Λ
+---------------- (⅋-left)
+Θ, A ⅋ B ⊢ Λ
+
+Γ, Γ' ⊢ A ⊗ B, Δ, Δ'    Θ, A^⊥ ⅋ B^⊥ ⊢ Λ
+------------------------------------------ (cut)
+Γ, Γ', Θ ⊢ Δ, Δ', Λ
+```
+
+The cut elimination process transforms this into:
+
+```
+Γ ⊢ A, Δ    Θ, A^⊥ ⊢ Λ'
+------------------------ (cut)
+Γ, Θ ⊢ Δ, Λ'
+
+Γ' ⊢ B, Δ'    Θ', B^⊥ ⊢ Λ''
+----------------------------- (cut)
+Γ', Θ' ⊢ Δ', Λ''
+```
+
+Where Λ' and Λ'' are appropriate partitions of Λ, and similarly for Θ' and Θ.
+
+The identity (axiom) rule in linear logic is:
+
+```
+---------- (axiom)
+⊢ A, A^⊥
+```
+
+Which states that for any formula A, we can prove A or its dual A^⊥. In interaction net terms, this represents the potential connection between dual ports. 
+
+#### Reduction to Multiplicative Unit
+
+The complete cut elimination process ultimately reduces to the multiplicative unit 1 (representing "no resources" or "done"). This happens through the following steps:
+
+1. When the cut rule is applied to the identity axioms:
+
+```
+⊢ A, A^⊥    A, A^⊥ ⊢
+---------------------- (cut)
+⊢
+```
+
+2. This empty sequent (⊢) is equivalent to proving the multiplicative unit 1:
+
+```
+⊢ = ⊢ 1
+```
+
+3. In interaction nets, this corresponds to the annihilation of dual agents, leaving no active pairs. The rules for the multiplicative unit are:
+
+```
+-------- (1-right)
+⊢ 1
+
+Γ ⊢ Δ
+--------- (1-left)
+Γ, 1 ⊢ Δ
+```
+
+The reduction of complex formulas to the unit 1 through cut elimination represents the successful completion of computation in the interaction net model, where all active pairs have been processed and all resources have been properly consumed.
+
+This transformation in sequent calculus directly corresponds to the interaction between tensor and par agents in our implementation.
+
 ### Tensor and Par Implementation
 
 The tensor and par agents are implemented as follows:
@@ -172,6 +263,10 @@ Contributions are welcome! Some areas for improvement:
 - Implementing more interaction net examples
 - Further performance optimization
 - Adding a proper test suite
+
+## License
+
+This project is available under the MIT License.
 
 ## References
 
